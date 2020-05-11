@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Application for Type Approval</title>
+    <style>
+        .colon {
+            column-width:20px;
+          }
+    </style>
+</head>
+
+<body>
+
+
+    
+    {% block reportlink %}
+    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+    {% endblock reportlink %}
+
+    {% block content %}
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-10">
+            <form action="{% url 'new_user' %}" >
+                <!-- {% if messages %}
+                {% for message in messages %}
+
+                <div class="alert alert-{{message.level_tag}}" role="alert">
+                    {{message.message}}
+                </div>
+
+                {% endfor %}
+                {% endif %} -->
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+                        <br>
+                        <img src="{% static 'img/title_logo.png' %}">
+                        <!-- <a href="www.google.com">my pdf</a> -->
+                        <hr>
+                        <table class="noborder" style="text-align: left;text-justify: auto;font-size: 15px;padding:15px;">
+                             <tbody>
+                            <tr>
+                                    <td style="width: 48%;">Type Approval No</td>
+                                   <td style="width: 2%;">:</td>
+                                    <td style="width: 50%;">{{firmname}}</td>
+                                    </tr>
+                               
+                            </tbody>
+                        </table>
+                        <p style="font-size: 15px;text-align: justify;">This  is  to  certify  that  the  {% if item_name %}<span style="font-weight: bold;">{{item_name}}</span>{% endif %}{% if not item_name %}______{% endif %} to  specification {% if part_no %}<span style="font-weight: bold;">{{part_no}}</span>{% endif %}{% if not part_no %}______{% endif %} designed,  developed  and  manufactured  by  {% if firmname %}<span style="font-weight: bold;">{{firmname}}</span>{% endif %}{% if not firmname %}______{% endif %}.  is  hereby  approved  for  production  as  per  specification  No. ______________________________   for use in all HAL projects and such similar applications.  This material has been tested as per governing specification No._____________________ in Co-ordination    with   RCMA (F&F-FOL).  It  has  met  the  requirements  as  detailed  in  the  type  record  compliance  statement.</p>
+                        <p style="font-size: 15px;text-align: justify;">The Provisional Clearances accorded for this product are hereby superceded consequent to issuance of this Type Approval. The process adopted to manufacture this product is sealed henceforth. The Type Approval number quoted above must be reflected in all relevant drawings, contracts & release notes.</p>
+                        <p style="font-size: 15px;text-align: justify;">This Type Approval is valid up to  Dt........................  unless otherwise cancelled or suspended or revoked and will have to be renewed subsequently. The vendor shall request RCMA (............), City ...............Pin..........., for subsequent renewal, three months before the expiry of Type Approval, with all relevant documents including performance feedback.</p>
+                        <p style="font-size: 15px;text-align: justify;">Prior concurrence of Centre for Military Airworthiness & Certification (CEMILAC), Bangalore, will have to be obtained if this approval is to be transferred to any other agency or changes if any to the SOP and declared to the performance indicated within the Type Record enclosed herewith are effected.</p>
+                        <p style="font-size: 15px;text-align: justify;">This approval is contingent upon strict adherence to the process demonstrated and the quality control aspects of bulk production being cleared by DGAQA, Ministry of Defence, Govt. of India.</p>
+<hr>
+<br><br>
+<img src="{{sign}}" width="200" height="100">
+<div style="font-size: 15px;">Chief Executive (Airworthiness)
+<br>
+Date:
+</div>
+                        
+                       
+                        <!-- <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on tde card title and make up tde bulk of tde card's content.</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                </div>
+
+                <br><br>
+                <input type="submit" value="Submit" class="btn btn-primary btn-user btn-block" />
+            </form>
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+
+
+
+    {% endblock content %}
+</body>
+
+</html>

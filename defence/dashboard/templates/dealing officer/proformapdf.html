@@ -1,0 +1,310 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Proforma_A for Type Approval</title>
+    <style>
+        @page {
+            margin: 1cm;
+            margin-top: 1cm;
+
+            @frame footer {
+                -pdf-frame-content: footerContent;
+                top: 1cm;
+                align-content: flex-end;
+                margin-left: 1cm;
+                margin-right: 1cm;
+                height: 0.5cm;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+    {% block reportlink %}
+    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+    {% endblock reportlink %}
+
+    {% block content %}
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-10">
+            <form action="{% url 'new_user' %}" metdod="post">
+                <!-- {% if messages %}
+                {% for message in messages %}
+
+                <div class="alert alert-{{message.level_tag}}" role="alert">
+                    {{message.message}}
+                </div>
+
+                {% endfor %}
+                {% endif %} -->
+                <div id="footerContent">
+                    RCMA-<pdf:pagenumber>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+                        <br>
+                        <img src="{% static 'img/cemilac_logo_proforma_title.png' %}">
+                        <hr>
+                        <table border="1" style="text-align: left;text-justify: auto;font-size: 15px;padding:5px;">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 5%;">1.</td>
+                                    <td style="width: 48%;">Brief Description of the product with end use of the
+                                        application(Not more than 50 words) </td>
+                                    <td style="width: 50%;">{{desc}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;">2.</td>
+                                    <td>Details of the auronautical store
+                                        <br>a.Nomenclature(Product Name)</td>
+                                    <td>{{item_name}} </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td>b.Part Number</td>
+                                    <td>{{part_no}} </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td colspan="2">c.MDI/DAL No.
+                                        <br>
+                                        {% for key, values in dict_dal_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        {{ forloop.counter }}.<a href="{{ values }}">{{key}} </a><br>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td colspan="2">d.BOM document reference with date
+                                        <br>
+                                        {% for key, values in dict_bom_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        {{ forloop.counter }}.<a href="{{ values }}">{{key}} </a><br>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td colspan="2">e.SOP/ACBS(document reference with date)
+                                        <br>
+                                        {% for key, values in dict_sop_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        {{ forloop.counter }}.<a href="{{ values }}">{{key}} </a><br>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td>f.Any other relevant information
+                                    </td>
+                                    <td> {{otheritems}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td style="width: 5%;">3.</td>
+                                    <td>
+                                        Firm Name with Address <br> a.Design and Development </td>
+                                    <td> {{firmname}}<br>{{addr1}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td>b.Manufacturer / Production</td>
+                                    <td> {{addr2}}</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;">4.</td>
+                                    <td>Application of TA by Design and Developing agency(IPR holder for the product)
+                                    </td>
+                                    <td>
+                                        {% for key, values in ta.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        <a href="{{ values }}">{{key}} </a>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;">5.</td>
+                                    <td colspan="2">a.Technical specification of the document reference with date
+                                        <br>
+                                        {% for key, values in dict_tech_spec_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        {{ forloop.counter }}.<a href="{{ values }}">{{key}} </a>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td colspan="2">b.Qualification Test schedule document reference with date
+                                        <br>
+                                        {% for key, values in dict_qts_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        {{ forloop.counter }}.<a href="{{ values }}">{{key}} </a>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td colspan="2">c.Qualification Test Result document reference with date
+                                        <br>
+                                        {% for key, values in dict_qtr_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        {{ forloop.counter }}.<a href="{{ values }}">{{key}} </a>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;">6.</td>
+                                    <td colspan="2">a.Certificate of Design
+                                        <br>
+                                        {% for key, values in dict_cod_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        {{ forloop.counter }}.<a href="{{ values }}">{{key}} </a>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td colspan="2">b.Type Record
+                                        <br>
+                                        {% for key, values in dict_cont_tr_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        {{ forloop.counter }}.<a href="{{ values }}">{{key}} </a>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;">7.</td>
+                                    <td colspan="2">Color photograph 3 different views
+                                        <br>
+                                        {% for key, values in dict_ph_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        {{ forloop.counter }}.<a href="{{ values }}">{{key}} </a>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                   
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;">8.</td>
+                                    <td colspan="2">User Performance feedback,if available(from DGAQA/DPSU/User Services)
+                                        <br>
+                                        {% for key, values in dict_per_fb_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        {{ forloop.counter }}.<a href="{{ values }}">{{key}} </a>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                   
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;">9.</td>
+                                    <td>a.Annual requirement of the product</td>
+                                    <td>{{req}} </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td>b.Cost of the product per unit in rupees</td>
+                                    <td>{{cost}} </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;"></td>
+                                    <td>c.Quantity produced till date</td>
+                                    <td>{{quantity}} </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;">10.</td>
+                                    <td colspan="2">Details of the PCs issued and subsequent renewals
+                                        <br>
+                                        {% for key, values in dict_pc_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        {{ forloop.counter }}.<a href="{{ values }}">{{key}} </a>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;">11.</td>
+                                    <td>Recommendations for Type Approval with comments and observation,if any</td>
+                                    <td>{{tacomments}} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <div align="right" style="font-size: 15px;">
+                            <img src="{{sign}}" width="200" height="100">
+                            <br>Signature of the RD/CRE
+
+                        </div>
+                        <div align="left" style="font-size: 15px;">
+                            <br>Date:{{datenow}}
+                            <br>Address:
+                            </div>
+
+                        <!-- <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on tde card title and make up tde bulk of tde card's content.</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                </div>
+
+                <br><br>
+                <input type="submit" value="Submit" class="btn btn-primary btn-user btn-block" />
+            </form>
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+
+
+
+    {% endblock content %}
+</body>
+
+</html>

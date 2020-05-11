@@ -1,0 +1,217 @@
+{% extends "dashboard/dashboard.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cemilac</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+    {% block heading %}
+    {% endblock heading %}
+
+
+
+    {% block content %}
+    <div class="row">
+
+        <div class="col-12">
+
+            {% if messages %}
+            {% for message in messages %}
+
+            <div class="alert alert-{{message.level_tag}}" role="alert">
+                {{message.message}}
+            </div>
+
+            {% endfor %}
+            {% endif %}
+            <div class="card" style="background-color: rgb(69, 126, 231); color:white">
+
+
+                <div class="card-body">
+                    <center> List of Annexures comments Details</center>
+
+                </div>
+            </div>
+            <br>
+
+            <div class="card">
+                <!-- <div class="card-body">
+                    <form action="{% url 'doc_add' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="idprefix" value="{{idprefix}}">
+                        <center>
+                            <table>
+
+                                <tr>
+                                    <td>{{form.filecategory}}</td>
+                                    <td>{{form.files}}</td>
+                                    <td>{{form.file_refno}}</td>
+                                    <td>{{form.refdate}}</td>
+                                    <td>
+                                        <input type="submit" class="btn btn-primary btn-user btn-block" value="+">
+                                    </td>
+                                </tr>
+
+                            </table> -->
+                        </center>
+                        <!-- {{form | crispy}} -->
+                    <!-- </form>
+                </div> -->
+            </div>
+            <br><br>
+            {% if details %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+
+
+                            <table style="width: 100%;">
+                                <tr>
+                                    <th>Anexture Name</th>
+                                    <th>Comments</th>
+                                    <th>Commented Date</th>
+                                    <th>Commented By</th>
+                                    <th>Responsible</th>
+                                    <th>Action Taken</th>
+                                    <th>Action Taken By</th> 
+                                    <th>idprefix</th>
+                                    <th>Status</th>
+                                    <th>Add Comments</th>
+                                </tr>
+
+                                {% for k in details %}
+                                <input type="hidden" name="name" value={{k.name}}>
+                                <input type="hidden" name="idprefix" value={{k.idprefix}}>
+    
+                                
+                        </div><!-- /.modal -->
+                        <tr>
+
+                            <td>{{k.name}}</td>
+                            <td>{{k.comments}}</td>
+                            <td>{{k.commented_date}}</td>
+                            <td>{{k.commented_by}}</td>
+                            <td>{{k.responsible}}</td>
+                            <td>{{k.action_taken}}</td>
+                            <td>{{k.action_taken_by}}</td>
+                            <td>{{k.idprefix}}</td>
+                            <td>{{k.status}}</td>
+
+                            <!-- <td><button type="submit" class="btn btn-default">
+                                    <i class="fas fa-folder-open"></i>
+                                </button></td> -->
+
+                            <!-- <td>
+                                <div style="cursor: pointer;"><i class="fas fa-exchange-alt" data-toggle="modal"
+                                        data-target="#updatefile{{k.id}}"></i></div>
+                            </td> -->
+                            
+                            <td>
+                                <center>
+                                <div style="cursor: pointer;"><i class="far fa-plus-square" data-toggle="modal"
+                                        data-target="#ModalExample{{k.id}}"></i></div>
+                                </center>
+                            </td>
+                        
+                        </tr>
+                        <form role="form" method="POST" action="{% url 'addanotherdoc' %}" name="firm1"
+                                    enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="name" value={{k.name}}>
+                                    <input type="hidden" name="idprefix" value={{k.idprefix}}>
+
+
+
+                                    <div id="ModalExample{{k.id}}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title text-xs-center">Add Comments Below -
+                                                        {{k.name}}</h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                {{form.name}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Comments</label>
+                                                                <div>
+                                                                    <input type="text" class="form-control input-lg"
+                                                                        name="comments">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Responsible</label>
+                                                                <div>
+                                                                    <input type="text" class="form-control input-lg"
+                                                                        name="responsible">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Action Taken</label>
+                                                                <div>
+                                                                    <input type="text" class="form-control input-lg"
+                                                                        name="action_taken">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <div class="form-group">
+                                                                <label class="control-label">status</label>
+                                                                <div>
+                                                                    <input type="text" class="form-control input-lg"
+                                                                        name="status">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                        {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+    </div>
+
+    {% endblock content %}
+</body>
+
+</html>

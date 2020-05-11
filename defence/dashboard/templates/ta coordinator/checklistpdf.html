@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Checklist for Type Approval</title>
+    <style>
+            @page {
+            margin: 1cm;
+            margin-top: 1cm;
+                @frame footer {
+                -pdf-frame-content: footerContent;
+                top: 1cm;
+                align-content: flex-end;
+                margin-left: 1cm;
+                margin-right: 1cm;
+                height: 0.5cm;
+                }
+            }
+            </style>
+            
+</head>
+
+<body>
+
+
+
+    {% block reportlink %}
+    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+    {% endblock reportlink %}
+
+    {% block content %}
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-10">
+            <form action="{% url 'new_user' %}" metdod="post">
+                <!-- {% if messages %}
+                {% for message in messages %}
+
+                <div class="alert alert-{{message.level_tag}}" role="alert">
+                    {{message.message}}
+                </div>
+
+                {% endfor %}
+                {% endif %} -->
+                <div id="footerContent">
+                        RCMA-<pdf:pagenumber>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <br>
+                        <br>
+                        <img src="{% static 'img/cemilac_logo_checklist_title.png' %}">
+                        <hr>
+                        <table  border="1"
+                            style="text-align: center;text-justify: auto;font-size: 15px;padding:5px;">
+                            <tr><th>S.No</th><th>List of Documents for Fresh Type Approval</th><th>Appendix</th></tr>
+                            <tbody>
+                                <tr>
+                                    <td style="width: 15%;">1.</td>
+                                    <td style="width: 50%;">Application for the type approval by D&D agency,duly recommemded by RD,RCMA</td>
+                                    <td style="width: 35%;">
+                                        <br>
+                                        {% for key, values in dict_appli_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        <a href="{{ values }}">{{key}} </a><br>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2.
+                                    </td>
+                                    <td>Proforma A for fresh type approval</td>
+                                    <td>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3.</td>
+                                    <td>Brief Description of the item and end use/application of the item</td>
+                                    <td>{{desc}} <br>
+                                        {% for key, values in dict_bd_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        <a href="{{ values }}">{{key}} </a><br>
+                                        {% endif %}
+                                        {% endfor %}</td>
+                                </tr>
+                                <tr>
+                                    <td>4.</td>
+                                    <td>Type record duly vetted by D&D and RCMA</td>
+                                    <td> <br>
+                                        {% for key, values in dict_tr_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                       <a href="{{ values }}">{{key}} </a><br>
+                                        {% endif %}
+                                        {% endfor %}</td>
+                                </tr>
+                                <tr>
+                                    <td>5.</td>
+                                    <td>Drawings(including one in type record) provisionally approved by RCMA</td>
+                                    <td> <br>
+                                        {% for key, values in dict_dr_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        <a href="{{ values }}">{{key}} </a><br>
+                                        {% endif %}
+                                        {% endfor %}</td>
+                                </tr>
+                                <tr>
+                                    <td>6.</td>
+                                    <td>Compliance statement to the specification and Qualification Test Schedule and hard copy authenticated by RD,RCMA</td>
+                                    <td> <br>
+                                        {% for key, values in dict_ds_obj.items %}
+                                        {% if key == 'No File Reference' %}
+                                        {{key}}
+                                        {% else %}
+                                        <a href="{{ values }}">{{key}} </a><br>
+                                        {% endif %}
+                                        {% endfor %}</td>
+                                </tr>
+                                <tr>
+                                    <td>7.
+                                    </td>
+                                    <td>Draft type approval certificate and hard copy authenticated by RD,RCMA</td>
+                                    <td> {{dtac}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <div align="right" style="font-size: 15px;">
+                                <img src="{{sign}}" width="200" height="100">
+                                <br>Signature of the RD/CRE
+                                <br>Date:{{datenow}}
+                                
+                        </div>
+                        <!-- <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on tde card title and make up tde bulk of tde card's content.</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                </div>
+
+                <br><br>
+                <input type="submit" value="Submit" class="btn btn-primary btn-user btn-block" />
+            </form>
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+
+
+
+    {% endblock content %}
+</body>
+
+</html>

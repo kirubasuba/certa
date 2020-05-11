@@ -1,0 +1,241 @@
+{% extends "dashboard/dashboard.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    {% block content %}
+    <div class="row">
+        <div class="col-11">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne" style="color:#4287f5;">
+                            Details
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <br>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn" type="button" data-toggle="collapse"
+                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                            style="color:#4287f5;">
+                                            Basic Info
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                    data-parent="#accordionExample">
+                                    <center>
+                                        <table style="width: 80%;">
+                                            <tr>
+                                                <td>FirmID</td>
+                                                <td>{{id}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>FirmName</td>
+                                                <td>{{taa.firmname}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>ItemName</td>
+                                                <td>{{taa.item_name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Part No</td>
+                                                <td>{{taa.part_no}}</td>
+                                            </tr>
+
+                                        </table>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-1"></div>
+                        <div class="col-3">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn" type="button" data-toggle="collapse"
+                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                            style="color:#4287f5;">
+                                            Files
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                    data-parent="#accordionExample">
+
+                                    <ul>
+                                        {% for tafs in taf %}
+                                        <li>
+                                            <form action="{% url 'pdfviewercopy' id %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="path" value={{tafs.filepath}}>
+                                                    <input type="hidden" name="ext" value={{tafs.ext}}>
+                                                    <!-- <input type="hidden" name="fc" value={{tafs.comments}}> -->
+                                                <button type="submit" class="btn">{{tafs.filecategory}}</button>
+
+                                            </form>
+
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+
+
+                </div>
+            </div>
+        </div>
+        <!-- <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne" style="color:#4287f5;">
+                                Files
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                        data-parent="#accordionExample">
+<center><br>
+                        <table style="width: 10%;">
+                            <tr>
+                                <td>FirmID</td>
+                                <td>{{id}}</td>
+                            </tr>
+                            <tr>
+                                <td>FirmName</td>
+                                <td>{{taa.firmname}}</td>
+                            </tr>
+                            <tr>
+                                <td>ItemName</td>
+                                <td>{{taa.item_name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Part No</td>
+                                <td>{{taa.part_no}}</td>
+                            </tr>
+
+                        </table>
+                    <br>
+                    
+                    </center>
+                    <h4>Files</h4>
+                    <ul>
+                            {% for tafs in taf %}
+                            <li>
+                                    <a  href="{% url 'pdfviewercopy' id %}">
+                                            {{tafs.filecategory}}
+                                          </a>
+                                
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn  collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color:#4287f5;">
+                                Files
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                                <div class="row">
+                                        <div class="col-3">
+                            <ul>
+                                {% for tafs in taf %}
+                                <li>
+                                        <a  href="{% url 'pdfviewercopy' id %}">
+                                                {{tafs.filecategory}}
+                                              </a>
+                                    
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            </div>
+                                    <div class="col-9">
+                                        
+                                            {% include "dealing officer/pdf viewer copy.html" %}
+                               
+                    </div></div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+
+    </div>
+    <br>
+    {% if messages %}
+                {% for message in messages %}
+                
+                    <div class="alert alert-{{message.level_tag}}" role="alert">
+                        {{message.message}}
+                    </div>
+                
+                {% endfor %}
+            {% endif %}
+    {% if url%}
+    <div class="row">
+            <div class="col-9">
+                
+<iframe src={{url}} style="width:900px; height:500px;" frameborder="0"></iframe>
+       
+</div>
+<div class="col-3">
+    <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <form action="{% url 'allcomments' %}" method="POST">
+                {% csrf_token %}
+                
+              <h5 class="card-title">Leave Comments Here!</h5>
+              <input type="hidden" name="id" value={{id}}>
+              <input type="hidden" name="path" value={{path}}>
+              <input type="hidden" name="ext" value={{ext}}>
+              <input type="hidden" name="fc" value={{fc}}>
+              <textarea class="form-control" aria-label="With textarea" name="comment"  rows="15">{{fc}}</textarea><br>
+              <button type="submit" class="btn btn-primary">Submit
+                </form>
+            </div>
+          </div>
+</div>
+</div>
+    <!-- {% include "dealing officer/pdf viewer copy.html" %} -->
+    {% endif %}
+    {% endblock content %}
+</body>
+
+</html>

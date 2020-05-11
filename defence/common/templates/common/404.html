@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+{% csrf_token %}
+
+{% block title %}
+CERTA 404
+{% endblock title %}
+
+
+{% block body %}
+<body id="page-top">
+
+{{ exception }}
+  
+</body>
+{% endblock body %}

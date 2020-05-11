@@ -1,0 +1,122 @@
+{% extends "dashboard/dashboard.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cemilac</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+    {% block heading %}
+    {% endblock heading %}
+
+
+    {% block content %}
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-10">
+           
+                {% if messages %}
+                {% for message in messages %}
+
+                <div class="alert alert-{{message.level_tag}}" role="alert">
+                    {{message.message}}
+                </div>
+
+                {% endfor %}
+                {% endif %}
+                <div class="card">
+                    <br>
+                        <center><h3>Firm Registration Details</h3></center>
+
+                    <div class="card-body">
+
+                        
+                            {% if user_details %}
+
+                            
+                            <table style="width: 100%;">
+                                
+                                <tr>
+                                    <th >Firm Name</th>
+                                    <th >User Name</th>
+                                    <th >Email ID</th>
+                                </tr>
+                                
+                                {% for k in user_details %}
+                                
+
+                                <form  method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                <input type="hidden" name="firmname" value={{k.firmname}}>
+                                <input type="hidden" name="username" value={{k.username}}>
+                                <input type="hidden" name="email" value={{k.email}}>
+                                <tr>
+                                    <!-- <td><button type="submit" class="btn btn-default">
+                                            <i class="fas fa-folder-open"></i>
+                                        </button></td> -->
+                                    <td>{{k.firmname}}</td>
+                                    <td>{{k.username}}</td>
+                                    <td>{{k.email}}</td>
+                                    <!-- <td>{{k.item_name}}</td>
+                                    <td>{{k.part_no}}-->
+                                    <!-- <td>
+                                            <button type="submit" class="btn"><i class="far fa-folder-open"></i></button>
+                                        
+                                       </td> -->
+                                </tr>
+                        </form>
+                          
+                          <!-- {% if taapp %}
+
+                                <form action="{% url 'newtypeapproval' %}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                <input type="hidden" name="idnew" value={{k.user_id}}>
+                                <input type="hidden" name="idpre" value={{k.idprefix}}>
+                                <tr> -->
+                                    <!-- <td><button type="submit" class="btn btn-default">
+                                            <i class="fas fa-folder-open"></i>
+                                        </button></td> -->
+                                    <!-- <td>{{k.sprodname}}</td>
+                                    <td>{{k.idprefix}}</td> -->
+                                    <!-- <td>{{k.item_name}}</td>
+                                    <td>{{k.part_no}}</td> -->
+                                    
+                                    <!-- <td>
+                                            <button type="submit" class="btn"><i class="far fa-folder-open"></i></button>
+                                        
+                                       </td>
+                                </tr>
+                        </form>
+                          {% endif %} -->
+            
+                                {% endfor %}
+                            </table>
+                            {% endif %}
+               
+                    </div>
+                </div>
+
+                <br><br>
+        </div>
+        <div class="col-1">
+        </div>
+    </div>
+
+
+
+    {% endblock content %}
+</body>
+
+</html>

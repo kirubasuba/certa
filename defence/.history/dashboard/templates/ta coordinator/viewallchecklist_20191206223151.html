@@ -1,0 +1,97 @@
+{% extends "dashboard/dashboard.html" %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cemilac</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+    {% block heading %}
+    All records
+    {% endblock heading %}
+
+    {% block content %}
+    <div class="row">
+
+        <div class="col-12">
+
+            <!-- <h2>View Firm Registration Details</h2> -->
+            {% if details %}
+            <table style="background-color: white" class="table table-hover">
+                <tr>
+
+                    <th>Firm ID</th>
+                    <!-- <th>Item Name</th>
+                        <th>Part No</th> -->
+                    <th style="text-align: center;">Type Approval Application</th>
+                    <th style="text-align: center;">Proforma A</th>
+                    <th style="text-align: center;">Details</th>
+                    <th style="text-align: center;">Checklist</th>
+                    <!-- <th style="text-align: center;">Draft TA</th> -->
+                </tr>
+                {% for k in details %}
+                <tr>
+                    <!-- <td><button type="submit" class="btn btn-default">
+                                <i class="fas fa-folder-open"></i>
+                            </button></td> -->
+                    <td>APP{{k.user_id}}CEMI</td>
+                    <!-- <td>{{k.item_name}}</td>
+                        <td>{{k.part_no}}</td> -->
+
+                    <td style="text-align: center;">
+                        <form action="{% url 'viewtyperecordbytac' k.user_id %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="idprefix" value={{k.idprefix}}>
+                            <input type="hidden" name="filename" value=''>
+                                <button type="submit" style="border: 0; background: none;"><i class="far fa-file-pdf"></i></button>
+                        </form>
+
+                    </td>
+                    <td style="text-align: center;">
+                            <form action="{% url 'proformaviewbytac' k.user_id %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="idprefix" value={{k.idprefix}}>
+                                <button type="submit" style="border: 0; background: none;"><i class="far fa-file-alt"></i></button>
+                        </form>
+                    </td>
+
+                    <td style="text-align: center;"><a href="{% url 'rowselect' k.user_id %}">
+                            <i class="far fa-folder-open"></i></a>
+                    </td>
+                    <td style="text-align: center;">
+                            <form action="{% url 'newchecklist' k.user_id %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="idprefix" value={{k.idprefix}}>
+                                    <button type="submit" style="border: 0; background: none;"><i class="fas fa-tasks"></i></button>
+                        </form>
+                    </td>
+                    <!-- <td style="text-align: center;">
+                            <form action="{% url 'draft_ta' k.user_id %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="idprefix" value={{k.idprefix}}>
+                                    <button type="submit" style="border: 0; background: none;"><i class="far fa-file-alt"></i></button>
+                            </form>
+                    </td> -->
+                    
+                </tr>
+
+                {% endfor %}
+            </table>
+            {% endif %}
+
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+
+</html>

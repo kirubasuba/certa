@@ -1,0 +1,94 @@
+{% extends "dashboard/dashboard.html" %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cemilac</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+    {% block heading %}
+    List of Applications
+    {% endblock heading %}
+
+    {% block content %}
+    <div class="row">
+
+        <div class="col-12">
+            <!-- <form action="{% url 'fileview' %}" method="post">
+                {% csrf_token %} -->
+                <!-- <h2>View Firm Registration Details</h2> -->
+                <table style="background-color: white" class="table table-hover">
+                    <tr>
+
+                        <th>Firm Name</th>
+                        <th>Item Name</th>
+                        <th>Part No</th>
+                        <th style="text-align: center;">TA Form</th>
+                        <th style="text-align: center;">TA Submitted Date</th>
+                        <th style="text-align: center;">Details</th>
+                        <th style="text-align: center;">Forward to TAC</th>
+
+                    </tr>
+                    {% if details %}
+                    {% for k in details %}
+
+                    <tr>
+
+                        <!-- <td><button type="submit" class="btn btn-default">
+                                <i class="fas fa-folder-open"></i>
+                            </button></td> -->
+                        <td>{{k.firmname}}</td>
+                        <td>{{k.item_name}}</td>
+                        <td>{{k.part_no}}</td>
+
+                        <td style="text-align: center;">
+                                <form action="{% url 'viewtyperecord' k.user_id %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="idprefix" value={{k.idprefix}}>
+                                    <input type="hidden" name="filename" value=''>
+                                        <button type="submit" style="border: 0; background: none;"><i class="far fa-file-pdf"></i></button>
+                                </form>
+        
+                            </td>
+                            <th style="text-align: center;">{{k.submitted_date}}</th>
+
+                        <td style="text-align: center;"><a href="{% url 'rowselect' k.user_id %}">
+                                <input type="hidden" name="idprefix" value={{k.idprefix}}>
+                            <i class="far fa-folder-open"></i></a>
+                        </td>
+                        <td style="text-align: center;">
+                                <form action="{% url 'RD_forward_tac' k.user_id %}" method="post" onsubmit="return confirm('Do you really want to forward?');">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="idprefix" value={{k.idprefix}}>
+                                        <button type="submit" style="border: 0; background: none;"><i class="fas fa-share-square"></i></button>
+                                </form>
+                        </td>
+                        
+                        
+                    </tr>
+
+                    {% endfor %}
+                    {% endif %}
+                {% if not details %}
+                    <tr><td colspan="7" style="text-align: center;font-weight: bold;">No Records Found!!!</td></tr>
+                {% endif %}
+                </table>
+                
+
+            <!-- </form> -->
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+
+</html>

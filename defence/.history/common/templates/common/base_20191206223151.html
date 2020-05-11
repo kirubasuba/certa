@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>{% block title %}TADMS- Welcome!{% endblock %}</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+  <style>
+      .bg-gradient-color {
+      background-color: #4e73df;
+      background-image: linear-gradient(180deg, #33c4e9  10%, #224abe 100%);
+      background-size: cover;
+    }
+    
+      .bg-gradient-colordo {
+      background-color: #4e73df;
+      background-image: linear-gradient(180deg, #07791f  10%, #22acbe  100%);
+      background-size: cover;
+    }
+    .bg-gradient-colorce {
+      background-color: #4e73df;
+      background-image: linear-gradient(180deg, #07791f  10%, #07791f  100%);
+      background-size: cover;
+    }
+    .bg-gradient-colortcs {
+      background-color: #4e73df;
+      background-image: linear-gradient(180deg, #e73e3e  10%, #f3b50b 100%);
+      background-size: cover;
+    }
+    .bg-gradient-colorrcmard {
+      background-color: #4e73df;
+      background-image: linear-gradient(180deg, #e73e3e  10%, #e73e3e 100%);
+      background-size: cover;
+    }
+    .bg-gradient-colortcsdo {
+      background-color: #4e73df;
+      background-image: linear-gradient(180deg, #e69c3b  10%, #e6be3b 100%);
+      background-size: cover;
+    }
+    .bg-gradient-colorta {
+      background-color: #4e73df;
+      background-image: linear-gradient(180deg, #f38f4c  10%, #f38f4c 100%);
+      background-size: cover;
+    }
+    .bg-gradient-colorrd {
+      background-color: #4e73df;
+      background-image: linear-gradient(180deg, #07791f  10%, #339966  100%);
+      background-size: cover;
+    }
+    .bg-gradient-colortta {
+      background-color: #4e73df;
+      background-image: linear-gradient(180deg, #57955a  10%, #68b16b 100%);
+      background-size: cover;
+    }
+    .bg-gradient-colordoo {
+      background-color: #4e73df;
+      background-image: linear-gradient(180deg, #30888b  10%, #22acbe 100%);
+      background-size: cover;
+    }
+    .bg-gradient-colordd {
+      background-color: #4e73df;
+      background-image: linear-gradient(180deg, #57955a  10%, #399969 100%);
+      background-size: cover;
+    }
+      </style>
+    
+
+</head>
+
+{% comment %} <body> {% endcomment %}
+
+{% block body %}
+<body id="page-top">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+
+    {% if request.VG != None %}
+    <ul class="navbar-nav bg-gradient-colortcs sidebar sidebar-dark accordion" id="accordionSidebar">
+    {% endif %}
+    
+    {% if request.VG == None and request.role != 'App Admin' and request.role != 'TA Applicant'%}
+    <ul class="navbar-nav bg-gradient-colordo sidebar sidebar-dark accordion" id="accordionSidebar"> 
+    {% endif %}  
+
+    {% if request.role == 'App Admin' or  request.role == 'TA Applicant' %}
+    <ul class="navbar-nav bg-gradient-color sidebar sidebar-dark accordion" id="accordionSidebar">
+            
+     {% endif %}
+    
+    <!-- <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"> -->
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#" data-toggle="modal" data-target="#myModal" href="{% url 'home' %}">
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-fighter-jet"></i>
+          </div>
+          <div></div>
+          <div class="sidebar-brand-text mx-3">TADMS <sup>GNS</sup></div>
+        </a>
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+  
+      <!-- Nav Item - Dashboard -->
+      {% if request.role != 'App Admin' %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>
+      {% endif %}
+  
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      {% if request.role == 'App Admin' %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <!-- <i class="fas fa-fw fa-cog"></i> -->
+          <i class="fas fa-users"></i>
+          <span>User</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <!-- <h6 class="collapse-header"></h6> -->
+            <a class="collapse-item" href="{% url 'new_cemilac_user' %}">New Registration</a>
+            <!-- <a class="collapse-item" href="{% url 'viewunregistration' %}">Unregistered Accounts</a>
+            <a class="collapse-item" href="{% url 'viewregistration' %}">Registered Accounts</a> -->
+            <div class="collapse-divider"></div>
+            <!-- <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="404.html">404 Page</a>
+            <a class="collapse-item" href="blank.html">Blank Page</a> -->
+          </div>
+        </div>
+      </li>
+      {% endif %}
+      {% if request.role == 'Dealing Officer' %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-file-alt"></i>
+          <span>Process TA</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <!-- <h6 class="collapse-header"></h6> -->
+            <a class="collapse-item" href="{% url 'process_proforma' %}">Received TRs</a>
+            <div class="collapse-divider"></div>
+            <!-- <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="404.html">404 Page</a>
+            <a class="collapse-item" href="blank.html">Blank Page</a> -->
+          </div>
+        </div>
+      </li>
+      {% endif %}
+
+      {% if request.role == 'TCS-GD' %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>D&D Firm Registration</span>
+        </a>
+        <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <!-- <h6 class="collapse-header"></h6> -->
+            <a class="collapse-item" href="{% url 'viewunregistration' %}">Received</a>
+            <a class="collapse-item" href="{% url 'viewregistration' %}">Registered</a>
+            <a class="collapse-item" href="{% url 'hold' %}">Hold</a>
+            <div class="collapse-divider"></div>
+            <!-- <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="404.html">404 Page</a>
+            <a class="collapse-item" href="blank.html">Blank Page</a> -->
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Type Approval Process</span>
+          </a>
+          <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <!-- <h6 class="collapse-header"></h6> -->
+              <a class="collapse-item" href="{% url 'gd_received' %}">Received TRs</a>
+              <a class="collapse-item" href="{% url 'gd_received_verified' %}">Ready for Approval</a>
+              <div class="collapse-divider"></div>
+              <!-- <h6 class="collapse-header">Other Pages:</h6>
+              <a class="collapse-item" href="404.html">404 Page</a>
+              <a class="collapse-item" href="blank.html">Blank Page</a> -->
+            </div>
+          </div>
+        </li>
+      {% endif %}
+
+      {% if request.role == 'TA Applicant' %}
+      
+
+  <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <i class="fas fa-dice-d20"></i>
+        <span>Future TA Cases</span>
+      </a>
+      <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <!-- <h6 class="collapse-header"></h6> -->
+          <a class="collapse-item" href="{% url 'id_gen' %}">New Product Entry</a>
+          <a class="collapse-item" href="{% url 'upload_refdoc' %}">Upload Reference Doc</a>
+          <a class="collapse-item" href="{% url 'upload_taapplication' %}">Apply Type Approval</a>
+          <div class="collapse-divider"></div>
+          <!-- <h6 class="collapse-header">Other Pages:</h6>
+          <a class="collapse-item" href="404.html">404 Page</a>
+          <a class="collapse-item" href="blank.html">Blank Page</a> -->
+        </div>
+      </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'newtypeapproval' %}">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Under Progress TA Cases</span></a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'newtypeapproval' %}">
+            <i class="fas fa-check-double"></i>
+            <span>Issue TA Cases</span></a>
+        </li>
+      {% endif %}
+      {% if request.role == 'TA Coordinator' %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Type Approval Process</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'TAC_received' %}">Received TRs</a>
+            <!-- <h6 class="collapse-header"></h6> -->
+            <a class="collapse-item" href="{% url 'checklist' %}">TRs Waiting for CL</a>
+            <div class="collapse-divider"></div>
+            <!-- <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="404.html">404 Page</a>
+            <a class="collapse-item" href="blank.html">Blank Page</a> -->
+          </div>
+        </div>
+      </li>
+      {% endif %}
+      {% if request.role == 'RD' %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Type Approval Process</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <!-- <h6 class="collapse-header"></h6> -->
+            <a class="collapse-item" href="{% url 'RD_received' %}">Received TRs</a>
+            <a class="collapse-item" href="{% url 'recommends_ta' %}">TRs Waiting for RD Reco.</a>
+            <div class="collapse-divider"></div>
+            <!-- <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="404.html">404 Page</a>
+            <a class="collapse-item" href="blank.html">Blank Page</a> -->
+          </div>
+        </div>
+      </li>
+      {% endif %}
+      {% if request.role == 'TCS-CE' %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Type Approval Process</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <!-- <a class="collapse-item" href="{% url 'ce_received' %}">Received TRs</a> -->
+            <!-- <h6 class="collapse-header"></h6> -->
+            <a class="collapse-item" href="{% url 'ce_received_verified' %}">Ready for Issuence</a>
+            <a class="collapse-item" href="{% url 'checklist' %}">Issued TA</a>
+            <div class="collapse-divider"></div>
+            <!-- <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="404.html">404 Page</a>
+            <a class="collapse-item" href="blank.html">Blank Page</a> -->
+          </div>
+        </div>
+      </li>
+      {% endif %}
+      {% if request.role == 'TCS-TA Coordinator' %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Type Approval Process</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'tac_received' %}">Received TRs</a>
+            <!-- <h6 class="collapse-header"></h6> -->
+            <a class="collapse-item" href="{% url 'TAC_received_verified' %}">Ready for Approval</a>
+            <div class="collapse-divider"></div>
+            <!-- <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="404.html">404 Page</a>
+            <a class="collapse-item" href="blank.html">Blank Page</a> -->
+          </div>
+        </div>
+      </li>
+      {% endif %}
+      {% if request.role == 'TCS-Dealing Officer' %}
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Type Approval Process</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{% url 'do_received' %}">Received TRs</a>
+            <!-- <h6 class="collapse-header"></h6> -->
+            <a class="collapse-item" href="{% url 'checklist' %}">Draft TA With Data Sheet</a>
+            <div class="collapse-divider"></div>
+            <!-- <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="404.html">404 Page</a>
+            <a class="collapse-item" href="blank.html">Blank Page</a> -->
+          </div>
+        </div>
+      </li>
+      {% endif %}
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+  
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+  
+    </ul>
+
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+    
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <!-- <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"> -->
+<!-- Topbar -->
+{% if request.role == 'App Admin' or  request.role == 'TA Applicant' %}
+      <nav class="navbar navbar-expand bg-gradient-color navbar-light bg-white topbar mb-4 static-top shadow">
+        <!-- <nav class="navbar navbar-expand bg-gradient-color navbar-light bg-white topbar mb-4 static-top shadow"> -->
+      {% endif %}
+
+      <!-- RCMA Topbar -->
+
+      {% if request.VG != None and request.role == 'Dealing Officer' %}
+      <nav class="navbar navbar-expand bg-gradient-colortcsdo navbar-light bg-white topbar mb-4 static-top shadow">
+          {% elif request.VG != None and request.role == 'TA Coordinator' %}
+          <nav class="navbar navbar-expand bg-gradient-colorta navbar-light bg-white topbar mb-4 static-top shadow">
+              {% elif request.VG != None and request.role == 'RD' %}
+              <nav class="navbar navbar-expand bg-gradient-colorrcmard navbar-light bg-white topbar mb-4 static-top shadow">
+
+      {% endif %}
+
+       <!-- TCS Topbar -->
+
+      {% if request.VG == None and request.role != 'App Admin' and request.role != 'TA Applicant' and request.role == 'TCS-CE'%}
+      <nav class="navbar navbar-expand bg-gradient-colorce navbar-light bg-white topbar mb-4 static-top shadow">
+          {% elif request.VG == None and request.role != 'App Admin' and request.role != 'TA Applicant' and request.role == 'TCS-Dealing Officer' %}
+          <nav class="navbar navbar-expand bg-gradient-colordoo navbar-light bg-white topbar mb-4 static-top shadow">
+              {% elif request.VG == None and request.role != 'App Admin' and request.role != 'TA Applicant' and request.role == 'TCS-TA Coordinator' %}
+              <nav class="navbar navbar-expand bg-gradient-colortta navbar-light bg-white topbar mb-4 static-top shadow">
+                  {% elif request.VG == None and request.role != 'App Admin' and request.role != 'TA Applicant' and request.role == 'TCS-RD' %}
+                  <nav class="navbar navbar-expand bg-gradient-colorrd navbar-light bg-white topbar mb-4 static-top shadow">
+                      {% elif request.VG == None and request.role != 'App Admin' and request.role != 'TA Applicant' and request.role == 'TCS-GD' %}
+                      <nav class="navbar navbar-expand bg-gradient-colordd navbar-light bg-white topbar mb-4 static-top shadow">
+      {% endif %}  
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <!-- Topbar Search -->
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <div class="col-xs-2">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                </div>
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <div class="col-xs-2">
+
+                  <i class="fas fa-search fa-sm"></i>
+                    </div>
+                </button>
+              </div>
+            </div>
+          </form>
+          {% if request.role == 'TA Applicant' %}
+          <h5 style="color: black;">{{request.user.first_name|title}}</h5>
+          {% endif %}
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+              {% if request.VG != None %}
+              <li class="nav-item dropdown no-arrow mx-1">
+                <center>
+                  <a class="nav-link dropdown-toggle" href="#" style="font-size: 18px;color: black;" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 {{request.VG}}
+                <br>
+                (Group)
+                  </a>
+                </center>
+                </li>
+                {% endif %}
+            <li class="nav-item dropdown no-arrow mx-1">
+              <center>
+              <a class="nav-link dropdown-toggle" href="#" style="font-size: 18px;color: black;" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{request.role}}
+              <br>
+              (Role)
+            </a>
+            </center>
+            </li>
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+
+            <!-- Nav Item - Alerts -->
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">3+</span>
+              </a>
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Alerts Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 12, 2019</div>
+                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 7, 2019</div>
+                    $290.29 has been deposited into your account!
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-exclamation-triangle text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 2, 2019</div>
+                    Spending Alert: We've noticed unusually high spending for your account.
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              </div>
+            </li>
+
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span style="color: black;">{% block loggedinuser %}
+                {% endblock loggedinuser %}</span>
+                {% if request.role == "TA Applicant" %}
+                <button class="btn"><i class="far fa-user"></i></button>
+                
+                <!-- <img class="img-profile rounded-circle" > -->
+                {% endif %}
+                {% if request.role != "TA Applicant" %}
+                <img class="img-profile rounded-circle" src="{% static 'img/logo.png' %}">
+                {% endif %}
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
+                </a>
+              </div>
+            </li>
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">
+            {% block heading %}
+            Base
+            {% endblock heading %}
+            </h1>
+            {% block reportlink %}
+            {% endblock reportlink %}
+          </div>
+          {% block content %}{% endblock content %}
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; GenNext PLM 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">TADMS</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Sample Text content </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+  <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+
+  <!-- Bootstrap modal form Javascript -->
+  {% comment %} <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script> {% endcomment %}
+
+  <!-- Core plugin JavaScript-->
+  <script src="{% static "vendor/jquery-easing/jquery.easing.min.js" %}"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="{% static "js/sb-admin-2.min.js" %}"></script>
+
+  <!-- Page level plugins -->
+  <script src="{% static "vendor/chart.js/Chart.min.js" %}"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="{% static "js/demo/chart-area-demo.js" %}"></script>
+  <script src="{% static "js/demo/chart-pie-demo.js" %}"></script>
+
+</body>
+{% endblock body %}
+{% comment %} </body> {% endcomment %}
+</html>
