@@ -52,7 +52,7 @@ Digitalize airworthiness certification to reduce the process time & increase the
  ### Linux
   * OS: Ubuntu Desktop Edition
   * Front-end: Bootstrap 4
-  * Back-end: MongoDB
+  * Back-end: Progresql
   * Language: Python3
   * Web Framework: Django2.2
   * IDE: Visual Studio Code
