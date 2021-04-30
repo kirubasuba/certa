@@ -42,7 +42,7 @@ six==1.12.0
 sqlparse==0.3.0
 tinycss2==1.0.2
 uritemplate==3.0.0
-urllib3==1.25.6
+urllib3==1.25.8
 WeasyPrint==50
 webencodings==0.5.1
 xhtml2pdf==0.2.3
